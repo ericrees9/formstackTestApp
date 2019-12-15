@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
+import { Button } from 'react-foundation';
+import PeopleCard from './components/PeopleCard/PeopleCard.js';
 
 function App() {
   const [people, setPeople] = useState([]);
@@ -17,16 +19,15 @@ function App() {
   return (
     <div className="App">
       <div className="Sidebar">
-        <button className="getButton" onClick={(e) => getPeople(e)}>GET</button>
-        <button className="addButton">ADD</button>
-        <button className="sortUpButton">SORT UP</button>
-        <button className="sortDownButton">SORT DOWN</button>
+        <Button className="getButton" onClick={(e) => getPeople(e)}>GET</Button>
+        <Button className="addButton">ADD</Button>
+        <Button className="sortUpButton">SORT UP</Button>
+        <Button className="sortDownButton">SORT DOWN</Button>
       </div>
       <div className="Results">
         {people.map((person, index) => {
           return(
-            `${person.id} , ${person.name} , ${person.username} `
-             
+            <PeopleCard personData={person}></PeopleCard>
           )
         })}
       </div>
