@@ -5,6 +5,7 @@ import PeopleCard from './components/PeopleCard/PeopleCard.js';
 
 function App() {
   const [people, setPeople] = useState([]);
+  const [count, setCount] = useState(0)
   
   const getPeople = (e) => {
     e.preventDefault();
@@ -18,6 +19,7 @@ function App() {
     e.preventDefault();
     let numerical = people.sort(function(a, b){return a.id-b.id});
     setPeople(numerical);
+    setCount(count + 1);
     console.log(people);
   }
 
@@ -25,6 +27,7 @@ function App() {
     e.preventDefault();
     let reversed = people.sort(function(a, b){return b.id-a.id});
     setPeople(reversed);
+    setCount(count - 1);
     console.log(people);
   }
   
