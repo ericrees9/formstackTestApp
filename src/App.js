@@ -15,6 +15,24 @@ function App() {
       .catch(err => console.error({ message: err }))
   }
 
+  const addPeople = (e) => {
+    e.preventDefault();
+    fetch('https://jsonplaceholder.typicode.com/users', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: 'foo',
+        username: 'bar',
+        email: 'erees1@gmail.com',
+        id: `${people.length + 1}`
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    .then(response => response.json())
+    .then(json => console.log(json))
+  }
+
   const sortPeopleUp = (e) => {
     e.preventDefault();
     let numerical = people.sort(function(a, b){return a.id-b.id});
