@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { Button } from 'react-foundation';
 import PeopleCard from './components/PeopleCard/PeopleCard.js';
+import { nextTick } from 'q';
 
 function App() {
   const [people, setPeople] = useState([]);
@@ -31,6 +32,7 @@ function App() {
     })
     .then(response => response.json())
     .then(json => console.log(json))
+    .catch(err => console.error({ message: err }))
   }
 
   const sortPeopleUp = (e) => {
@@ -48,6 +50,44 @@ function App() {
     setCount(count - 1);
     console.log(people);
   }
+
+  const deleteArray = (id) => {
+    // console.log(`Running in deleteArray function. The id is: ${id}`);
+
+    // let minusOne = people.splice(id-1,1);
+    // setPeople(people);
+    // setCount(count + 1);
+    // console.log(people);
+    
+    // console.log(`The arrayID is: ${id-1}`);
+
+    // for( let i = 0; i < people.length; i++ ){ 
+    //   if (people[i] === id-1) {
+    //     console.log(`the loop is running.`);
+    //     people.splice(i, 1);
+    //     i--;
+    //     setPeople(people);
+    //     setCount(count + 1); 
+    //     console.log(people);
+    //   }
+    // }
+
+    // people.forEach((e) => {
+    //   // console.log(e);
+    //   // console.log(id);
+    //   if (e.id == id) {
+    //     console.log(`success!`)
+    //     let minus = people.splice(id-1, 1);
+    //     setPeople(people);
+    //     setCount(count + 1); 
+    //   }
+    // });
+
+    let minus = people.splice(people.findIndex(e => e.id === id),1);
+    setPeople(people);
+    setCount(count + 1);
+    console.log(people);
+  }
   
   return (
     <div className="App">
@@ -60,7 +100,9 @@ function App() {
       <div className="Results">
         {people.map((person, index) => {
           return(
-            <PeopleCard personData={person}></PeopleCard>
+            // passing the individual person data as props to the component for data to render
+            // passing in the getPeople function so that the deletePeople function in the component can refresh the array
+            <PeopleCard personData={person} deleteArray={deleteArray}></PeopleCard>
           )
         })}
       </div>
