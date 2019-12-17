@@ -29,12 +29,13 @@
   overflow-y: scroll;
 }
 
-.getButton {
-  height: 8em;
-  width: 10em;
+.addPeople {
+  display: flex;
+  flex-direction: column;
+  width: 12em;
 }
 
-.addButton {
+.getButton {
   height: 8em;
   width: 10em;
 }

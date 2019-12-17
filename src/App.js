@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import './App.css';
 import { Button } from 'react-foundation';
 import PeopleCard from './components/PeopleCard/PeopleCard.js';
-import { nextTick } from 'q';
 
 function App() {
   const [people, setPeople] = useState([]);
   const [count, setCount] = useState(0)
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   
   const getPeople = (e) => {
     e.preventDefault();
@@ -14,16 +16,19 @@ function App() {
       .then(response => response.json())
       .then(json => setPeople(json))
       .catch(err => console.error({ message: err }))
+    
+    console.log(count);
   }
 
   const addPeople = (e) => {
     e.preventDefault();
-    fetch('https://jsonplaceholder.typicode.com/users', {
+  
+    fetch('https://jsonplaceholder.typicode.com/users/', {
       method: 'POST',
       body: JSON.stringify({
-        name: 'foo',
-        username: 'bar',
-        email: 'erees1@gmail.com',
+        name: `${name}`,
+        username: `${username}`,
+        email: `${email}`,
         id: `${people.length + 1}`
       }),
       headers: {
@@ -31,8 +36,11 @@ function App() {
       }
     })
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(json => people.push(json), setCount(count + 1))
     .catch(err => console.error({ message: err }))
+
+    console.log(count);
+    console.log(`The array length is ${people.length}`);
   }
 
   const sortPeopleUp = (e) => {
@@ -93,7 +101,12 @@ function App() {
     <div className="App">
       <div className="Sidebar">
         <Button className="getButton" onClick={(e) => getPeople(e)}>GET</Button>
-        <Button className="addButton">ADD</Button>
+        <div className="addPeople">
+          <input placeholder="First Name, Last Name" onChange={(e) => setName(e.target.value)} />
+          <input placeholder="Username" onChange={(e) => setUsername(e.target.value)} /> 
+          <input placeholder="email@address.com" onChange={(e) => setEmail(e.target.value)} />
+          <Button onClick={(e) => addPeople(e)}>Add</Button>
+        </div>
         <Button className="sortUpButton" onClick={(e) => sortPeopleUp(e)}>SORT UP</Button>
         <Button className="sortDownButton" onClick={(e) => sortPeopleDown(e)}>SORT DOWN</Button>
       </div>
