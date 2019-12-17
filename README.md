@@ -1,4 +1,42 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## GetPeopleApp (Project for Formstack)
+
+This project was made as an interview assignment for a Front-End engineering position with Formstack. It's a React project meant to show the fetching, storage, and manipulation of data on the front-end. 
+
+## Installation
+
+1.) Fork the repository.  
+2.) Clone the forked repository to your system.  
+3.) Viola!
+
+## How to Use GetPeopleApp
+
+1.) Install the application.  
+2.) Run the application.  
+
+```javascript
+npm start
+```  
+3.) Click "Get people" to retrieve a list of random people.  
+4.) Add a new person in the input boxes and click "Add person".  
+5.) Sort IDs numerically with the third button.   
+6.) Sort IDs in reverse numerical order with the final button.  
+7.) Select users with the radio button in their card.  
+8.) Delete users with the delete button in their card.  
+
+## Tools Used to Create This App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).  
+[React-Foundation](https://react.foundation/).  
+[JSONPlaceholder](https://jsonplaceholder.typicode.com/).
+
+## Notes
+
+In using JSONPlaceholder, add and delete functions are functional, but don't always represent the changes that are input by the user. I wanted to add a fetch into this project, but given JSONPlaceholder's data accessibility, data is pseudo-manipulated on the server-side. A quote from [their page](https://jsonplaceholder.typicode.com/guide.html):
+
+```bash
+Important: the resource will not be really deleted on the server but it will be faked as if.
+```  
+This may reflect upon my project, but I enjoyed including calls to an API for data instead of using dummy test data. 
 
 ## Available Scripts
 
