@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../PeopleCard/PeopleCard.css';
-import { Button, Callout, Colors, Switch, Sizes } from 'react-foundation';
+import { Button, Callout, Colors, Switch } from 'react-foundation';
 
 const PeopleCard = (props) => {
-    // console.log(props);
 
+    // delete function that is called when button is clicked. deleteArray is a function passed in from the parent component so that it can dynamically know which ID number is being clicked.
     const deletePeople = () => {
-        // let getPeople = props.getPeople;
+        // this is the fetch that I was originally using to delete data, but the webservice doesn't actually delete any data so it was causing problems.
 
         // fetch(`https://jsonplaceholder.typicode.com/users/${props.personData.id}`, {
         //     method: 'DELETE'
@@ -18,6 +18,8 @@ const PeopleCard = (props) => {
         props.deleteArray(props.personData.id);
     }
 
+    // this card relies heavily on props being passed in during the people.map on the parent component.
+    // this set-up allows for all of this data to be generated dynamically for each individual card.
     return(
         <Callout className="mainCard" color={Colors.SECONDARY}>
             <div className="infoArea">

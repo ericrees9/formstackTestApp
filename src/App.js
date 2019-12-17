@@ -4,8 +4,11 @@ import { Button } from 'react-foundation';
 import PeopleCard from './components/PeopleCard/PeopleCard.js';
 
 function App() {
+  // setting a state for holding my people results
   const [people, setPeople] = useState([]);
+  // setting a dummy state to re-render the page when necessary
   const [count, setCount] = useState(0)
+  // using state for form fills!
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -16,8 +19,6 @@ function App() {
       .then(response => response.json())
       .then(json => setPeople(json))
       .catch(err => console.error({ message: err }))
-    
-    console.log(count);
   }
 
   const addPeople = (e) => {
@@ -38,11 +39,9 @@ function App() {
     .then(response => response.json())
     .then(json => people.push(json), setCount(count + 1))
     .catch(err => console.error({ message: err }))
-
-    console.log(count);
-    console.log(`The array length is ${people.length}`);
   }
 
+  // function to sort my results array by the ID number
   const sortPeopleUp = (e) => {
     e.preventDefault();
     let numerical = people.sort(function(a, b){return a.id-b.id});
@@ -51,6 +50,7 @@ function App() {
     console.log(people);
   }
 
+  // function to sort my results array inversely by the ID number
   const sortPeopleDown = (e) => {
     e.preventDefault();
     let reversed = people.sort(function(a, b){return b.id-a.id});
@@ -59,6 +59,8 @@ function App() {
     console.log(people);
   }
 
+  // a function that is called in my child component when the delete button is clicked. 
+  // the function uses findIndex to match the object's ID with the ID given from the child component to then splice the result out of the larger array.
   const deleteArray = (id) => {
     // console.log(`Running in deleteArray function. The id is: ${id}`);
 
@@ -100,15 +102,15 @@ function App() {
   return (
     <div className="App">
       <div className="Sidebar">
-        <Button className="getButton" onClick={(e) => getPeople(e)}>GET</Button>
+        <Button className="getButton" onClick={(e) => getPeople(e)}>Get people</Button>
         <div className="addPeople">
           <input placeholder="First Name, Last Name" onChange={(e) => setName(e.target.value)} />
           <input placeholder="Username" onChange={(e) => setUsername(e.target.value)} /> 
           <input placeholder="email@address.com" onChange={(e) => setEmail(e.target.value)} />
-          <Button onClick={(e) => addPeople(e)}>Add</Button>
+          <Button onClick={(e) => addPeople(e)}>Add person</Button>
         </div>
-        <Button className="sortUpButton" onClick={(e) => sortPeopleUp(e)}>SORT UP</Button>
-        <Button className="sortDownButton" onClick={(e) => sortPeopleDown(e)}>SORT DOWN</Button>
+        <Button className="sortUpButton" onClick={(e) => sortPeopleUp(e)}>Sort IDs numerically</Button>
+        <Button className="sortDownButton" onClick={(e) => sortPeopleDown(e)}>Reverse ID sorting</Button>
       </div>
       <div className="Results">
         {people.map((person, index) => {
